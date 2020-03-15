@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Carta from './Carta';
+import './Tablero.css';
 
 export default class Tablero extends Component {
     render () {
@@ -6,7 +8,7 @@ export default class Tablero extends Component {
         return (
             <div className="tablero">
                 {
-                    cartas.map ((carta) => <span>{carta}</span>)
+                    cartas.map ((carta) => <Carta></Carta>)
                 }
             </div>
         );
