@@ -1,10 +1,10 @@
 import shuffle from 'lodash.shuffle';
-import { Suspense } from 'react';
+import FontAwesomeClasses from './fontAwesomeClasses';
 
 const NUMERO_DE_CARTAS =20
 
 export default () => {
-    const fontAwesomeClasses =['icono-2', 'icono-3'];
+    const fontAwesomeClasses = FontAwesomeClasses();
     let cartas = [];
 
     while (cartas.length < NUMERO_DE_CARTAS) {
