@@ -7,12 +7,12 @@ export default class Header extends Component {
             <header>
                 <div className="titulo"> React Memorias</div>
                 <div>
-                    <button className="boton-reiniciar">
+                    <button className="boton-reiniciar" onClick={this.props.resetearPartida}>
                         Reiniciar
                     </button>
                 </div>
                 <div className="titulo">
-                    Intentos:
+                    Intentos: {this.props.numeroDeIntentos}
                 </div>
             </header>
         );
