@@ -27,13 +27,13 @@ class App extends Component {
       <Tablero 
         baraja = {this.state.baraja}
         parejaSeleccionada = {this.state.parejaSeleccionada}
-        SeleccionarCarta = {() => this.SeleccionarCarta(carta)}
+        seleccionarCarta = {(carta) => this.seleccionarCarta(carta)}
       />
     </div>
     );    
   }
 
-  SeleccionarCarta (carta) {
+  seleccionarCarta (carta) {
     if (
       this.state.estaComparando || 
       this.state.parejaSeleccionada.indexOf(carta) > -1 ||
@@ -45,7 +45,36 @@ class App extends Component {
     const parejaSeleccionada = [...this.state.parejaSeleccionada, carta];
     this.setState({
       parejaSeleccionada
-    }) 
+    })
+
+    if (parejaSeleccionada.length === 2) {
+      this.compararPareja(parejaSeleccionada)
+    }
+  }
+
+  compararPareja(parejaSeleccionada) {
+    this.setState({estaComparando: true});
+
+    setTimeout(() => {
+      const [primeraCarta, segundaCarta] = parejaSeleccionada;
+      let baraja = this.state.baraja
+
+      if (primeraCarta.icono === segundaCarta.icono){
+        baraja = baraja.map ((carta) => {
+          if (carta.icono != primeraCarta.icono) {
+            return carta;
+          }
+
+          return {...carta, fueAdivinada: true};
+        })
+      }
+
+      this.setState ({
+        parejaSeleccionada: [],
+        baraja,
+        estaComparando: false
+      })
+    }, 1000)
   }
 
 }
