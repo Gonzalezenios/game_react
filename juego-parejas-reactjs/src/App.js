@@ -8,7 +8,9 @@ import construirBaraja from './utils/construirBaraja';
 const getEstadoInicial = () => {
   const baraja = construirBaraja();
   return {
-    baraja
+    baraja,
+    parejaSeleccionada: [],
+    estaComparando: false
   }
 }
 
@@ -24,10 +26,28 @@ class App extends Component {
       <Header />
       <Tablero 
         baraja = {this.state.baraja}
+        parejaSeleccionada = {this.state.parejaSeleccionada}
+        SeleccionarCarta = {() => this.SeleccionarCarta(carta)}
       />
     </div>
-    );
+    );    
   }
+
+  SeleccionarCarta (carta) {
+    if (
+      this.state.estaComparando || 
+      this.state.parejaSeleccionada.indexOf(carta) > -1 ||
+      carta.fueAdivinada
+    ) {
+      return;
+    }
+
+    const parejaSeleccionada = [...this.state.parejaSeleccionada, carta];
+    this.setState({
+      parejaSeleccionada
+    }) 
+  }
+
 }
 
 export default App;
